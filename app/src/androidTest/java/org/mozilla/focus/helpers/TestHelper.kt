@@ -12,8 +12,11 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.web.sugar.Web
@@ -96,6 +99,7 @@ object TestHelper {
     fun restartApp(activity: MainActivityFirstrunTestRule) {
         with(activity) {
             finishActivity()
+            Thread.sleep(5000)
             mDevice.waitForIdle()
             launchActivity(null)
         }
@@ -126,6 +130,9 @@ object TestHelper {
         }
         mDevice.waitForIdle(waitingTime)
     }
+
+    fun verifyLocalizedText(localizedText: String): ViewInteraction =
+        onView(withText(localizedText)).check(matches(isDisplayed()))
 
     // wait for web area to be visible
     @JvmStatic

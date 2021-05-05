@@ -69,6 +69,17 @@ class SettingsRobot {
             SettingsMozillaMenuRobot().interact()
             return SettingsMozillaMenuRobot.Transition()
         }
+
+        fun openLocalizedGeneralSettingsMenu(
+            localizedText: String,
+            interact: SettingsGeneralMenuRobot.() -> Unit
+        ): SettingsGeneralMenuRobot.Transition {
+            localizedGeneralSettingsHeading(localizedText).waitForExists(waitingTime)
+            localizedGeneralSettingsHeading(localizedText).click()
+
+            SettingsGeneralMenuRobot().interact()
+            return SettingsGeneralMenuRobot.Transition()
+        }
     }
 }
 
@@ -78,6 +89,12 @@ private val generalSettingsMenu = settingsMenuList.getChild(
     UiSelector()
         .resourceId("android:id/title")
         .text("General")
+)
+
+private fun localizedGeneralSettingsHeading(localizedText: String) = settingsMenuList.getChild(
+    UiSelector()
+        .text(localizedText)
+        .resourceId("android:id/title")
 )
 
 private val searchSettingsMenu = settingsMenuList.getChild(

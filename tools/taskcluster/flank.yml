@@ -38,8 +38,8 @@ gcloud:
   performance-metrics: true
 
   test-targets:
-    - package org.mozilla.focus.activity
-    - package org.mozilla.focus.screenshots
+    - package org.mozilla.focus.activity.SwitchLocaleTest
+    # - package org.mozilla.focus.screenshots
 
   device:
     - model: Pixel2
